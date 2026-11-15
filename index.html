@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>대입의 신</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800&family=Noto+Serif+KR:wght@600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div id="app-shell">
+    <!-- 상단 고정 상태 바 -->
+    <header id="status-bar" class="status-bar">
+      <div class="status-top-row">
+        <div class="brand-area">
+          <span class="game-title">대입의 신</span>
+          <span id="badge-period" class="badge badge-period">입시 준비</span>
+          <span id="badge-school" class="badge badge-school">배정 대기</span>
+        </div>
+        <div class="header-actions">
+          <button id="btn-shop" class="icon-btn" type="button" title="수험생 상점" style="display:none;">🛒 상점</button>
+          <button id="btn-stats" class="icon-btn" type="button" title="내 능력치 & 성적 기록" style="display:none;">📊 기록</button>
+          <button id="btn-reset" class="icon-btn icon-btn-muted" type="button" title="새로 시작">↺</button>
+        </div>
+      </div>
+      <div class="status-badges-row">
+        <div class="stat-pill">
+          <span class="pill-label">자금</span>
+          <span id="val-money" class="pill-val">0만 원</span>
+        </div>
+        <div class="stat-pill stat-pill-gauge">
+          <span class="pill-label">체력</span>
+          <div class="mini-gauge"><div id="bar-stamina" class="mini-gauge-fill stamina-fill" style="width:80%"></div></div>
+          <span id="val-stamina" class="pill-val">80</span>
+        </div>
+        <div class="stat-pill stat-pill-gauge">
+          <span class="pill-label">멘탈</span>
+          <div class="mini-gauge"><div id="bar-mental" class="mini-gauge-fill mental-fill" style="width:80%"></div></div>
+          <span id="val-mental" class="pill-val">80</span>
+        </div>
+        <div class="stat-pill">
+          <span class="pill-label">세특</span>
+          <span id="val-setuk" class="pill-val">-</span>
+        </div>
+        <div class="stat-pill">
+          <span class="pill-label">내신</span>
+          <span id="val-gpa" class="pill-val">-</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- 중앙 컨테이너 (max-width: 780px) -->
+    <main id="main-container" class="main-container">
+      <!-- 상단 16:9 고해상도 픽셀 아트 뷰포트 -->
+      <section class="viewport-card">
+        <div class="viewport-wrapper">
+          <canvas id="main-viewport" width="480" height="270"></canvas>
+          <div id="viewport-overlay-tag" class="viewport-tag" style="display:none;"></div>
+        </div>
+      </section>
+
+      <!-- 메인 콘텐츠 영역 -->
+      <section id="stage-content" class="stage-content"></section>
+
+      <!-- 최근 활동 로그 (간략 표시) -->
+      <section id="log-card" class="log-card" style="display:none;">
+        <div class="log-header">최근 수험 일지</div>
+        <ul id="log-list" class="log-list"></ul>
+      </section>
+    </main>
+  </div>
+
+  <!-- 로딩 모션 모달 -->
+  <div id="loading-modal" class="modal-backdrop" style="display:none;">
+    <div class="modal-card modal-loading">
+      <div class="loading-spinner"></div>
+      <h3 id="loading-title" class="loading-title">시험 진행 중...</h3>
+      <p id="loading-step" class="loading-step">문제를 풀고 있습니다.</p>
+      <div class="loading-progress-track">
+        <div id="loading-progress-bar" class="loading-progress-bar"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 이벤트 / 면접 / 상담 / StudyGram 팝업 모달 -->
+  <div id="event-modal" class="modal-backdrop" style="display:none;">
+    <div class="modal-card modal-event">
+      <div id="event-modal-inner"></div>
+    </div>
+  </div>
+
+  <!-- 공식 성적표 (내신 / KICE 성적통지표) 모달 -->
+  <div id="report-modal" class="modal-backdrop" style="display:none;">
+    <div class="modal-card modal-report">
+      <div id="report-modal-inner"></div>
+    </div>
+  </div>
+
+  <!-- 합격통지서 & 수험생 일대기 모달 -->
+  <div id="cert-modal" class="modal-backdrop" style="display:none;">
+    <div class="modal-card modal-cert">
+      <div id="cert-modal-inner"></div>
+    </div>
+  </div>
+
+  <!-- 상점 / 능력치 상세 모달 -->
+  <div id="utility-modal" class="modal-backdrop" style="display:none;">
+    <div class="modal-card modal-utility">
+      <div id="utility-modal-inner"></div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/pixelArt.js"></script>
+  <script src="js/engine.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>
